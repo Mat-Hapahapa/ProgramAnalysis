@@ -2,9 +2,9 @@ package models;
 
 public class Node {
 
-    int fromNode;
-    int toNode;
-    String operation;
+    private int fromNode;
+    private int toNode;
+    private String operation;
 
     public Node(int fromNode, int toNode, String operation) {
         this.fromNode = fromNode;
