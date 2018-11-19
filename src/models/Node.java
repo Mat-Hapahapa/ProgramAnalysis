@@ -35,4 +35,8 @@ public class Node {
     public void setOperation(String operation) {
         this.operation = operation;
     }
+    
+    public String toString() {
+    	return "(x" + this.fromNode + ", x" + this.toNode + ", " + this.operation + ")";
+    }
 }

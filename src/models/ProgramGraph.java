@@ -39,4 +39,10 @@ public class ProgramGraph {
     public Node getNode(int i) {
         return this.nodes.get(i);
     }
+    
+    public void printGraph() {
+    	for(Node n: this.nodes) {
+    		System.out.println(n.toString());
+    	}
+    }
 }
