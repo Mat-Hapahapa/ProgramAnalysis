@@ -1,4 +1,5 @@
 import models.Node;
+import models.ProgramGraph;
 import models.WorklistLIFO;
 
 import java.util.ArrayList;
@@ -11,13 +12,13 @@ public class main {
         System.out.println("Test Program");
 
 
-
+        ProgramGraph G = new ProgramGraph(getSimpleProgram());
 
 
 
     }
 
-    public ArrayList<String> getSimpleProgram(){
+    public static ArrayList<String> getSimpleProgram(){
         ArrayList<String> program = new ArrayList<String>();
         program.add("0,1,y:=1");
         program.add("1,2,x>0");
@@ -27,7 +28,7 @@ public class main {
         return program;
     }
 
-    public ArrayList<String> getAdvancedProgram(){
+    public static ArrayList<String> getAdvancedProgram(){
 
         System.out.println("" +
                 "1,2,x := 0" +
