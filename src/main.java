@@ -13,8 +13,7 @@ public class main {
 
 
         ProgramGraph G = new ProgramGraph(getSimpleProgram());
-
-
+        G.printGraph();
 
     }
 

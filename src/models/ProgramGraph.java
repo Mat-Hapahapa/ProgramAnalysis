@@ -12,7 +12,7 @@ public class ProgramGraph {
     	this.nodes = new ArrayList<Node>();
     	
     	for(String p: path) {
-    		ArrayList<String> pList = (ArrayList<String>)Arrays.asList(p.trim().split(","));
+    		List<String> pList = Arrays.asList(p.trim().split(","));
     		
     		// Node (1,2,x:=0)
     		int startNode = Integer.valueOf(pList.get(0));
