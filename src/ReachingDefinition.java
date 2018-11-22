@@ -14,13 +14,13 @@ public class ReachingDefinition {
 	public ReachingDefinition() {
 		nodeList = new HashMap<Integer, ArrayList<Node>>();
 	}
-	
+
 	public void initAnalize(Node node) {
-		
+
 	}
 
 	public void analize(Node node) {
-		
+
 	}
 
 }
