@@ -8,7 +8,7 @@ public class VariableList {
     ArrayList<String> varList;
 
     public VariableList() {
-        String alphabet = "qwertyuiopasdfghjklzxcvbnm";
+        String alphabet = "qwertyuiopasdfghjklzxcvbnmA[]";
         String[] strArray = alphabet.split("");
         varList = new ArrayList<>(Arrays.asList(strArray));
         varList.add("R.fst");
@@ -26,9 +26,16 @@ public class VariableList {
     public ArrayList<String> getVariables(String operation) {
         ArrayList<String> stringList = new ArrayList<>();
         for (String str : operation.split("")) {
-
             if (varList.contains(str)) {
-                stringList.add(str);
+                if (operation.contains("R.fst")) {
+                    stringList.add("R.fst");
+                } else if (operation.contains("R.snd")) {
+                    stringList.add("R.snd");
+                } else if (operation.contains("A[")) {
+                    stringList.add("A["+ operation.split("")[operation.indexOf("[") + 1] + "]");
+                } else {
+                    stringList.add(str);
+                }
             }
         }
         return stringList;
