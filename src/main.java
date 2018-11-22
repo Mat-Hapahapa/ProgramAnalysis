@@ -3,7 +3,6 @@ import models.ProgramGraph;
 import models.WorklistLIFO;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class main {
 
@@ -32,6 +31,8 @@ public class main {
         for(Node node: G.getNodes()) {
         	infl.generateList(node);
         }
+        
+        System.out.println(infl.toString());
 
     }
 
