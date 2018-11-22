@@ -33,6 +33,16 @@ public class main {
         }
         
         System.out.println(infl.toString());
+        
+        while(!wlLIFO.isEmpty()) {
+        	Node n = wlLIFO.extract();
+        	if(rd.eval(n)) {
+        		rd.analize(n);
+        		for(Node constraint: infl.getInflByConstraint(n)) {
+        			wlLIFO.insert(constraint);
+        		}
+        	}
+        }
 
     }
 

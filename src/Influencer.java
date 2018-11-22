@@ -21,6 +21,10 @@ public class Influencer {
         nodeList.get(node.getFromNode()).add(node);
 	}
 	
+	public ArrayList<Node> getInflByConstraint(Node node) {
+		return nodeList.get(node.getToNode());
+	}
+	
 	public String toString() {
 		return nodeList.toString();
 	}
