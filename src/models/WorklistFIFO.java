@@ -5,16 +5,24 @@ import java.util.List;
 
 public class WorklistFIFO {
 
-    public List<Node> empty(){
-        return new ArrayList<Node>();
+    public List<Node> worklist;
+
+    public WorklistFIFO() {
+        worklist = new ArrayList<Node>();
     }
 
-    public List<Node> insert(Node constrain, List<Node> worklist) {
+
+    public void empty(){
+        // Not used - get worklist instead
+    }
+
+    public void insert(Node constrain) {
         worklist.add(constrain);
-        return worklist;
     }
 
-    public void extract(List<Node> worklist) {
-
+    public Node extract() {
+        Node constrain = worklist.get(0);
+        worklist.remove(0);
+        return constrain;
     }
 }
