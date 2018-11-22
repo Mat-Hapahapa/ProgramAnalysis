@@ -24,15 +24,22 @@ public class main {
         	infl.initFromNode(node);
         }
         
+        // Is adding the variables into the first Node
+        rd.addDeclarations();
+        
+        System.out.println();
+        System.out.print("Variables RD --> ");
         for(String s : rd.leastElement) {
-        	System.out.println(s);
+        	System.out.print(s + ' ');
         }
         
         for(Node node: G.getNodes()) {
         	infl.generateList(node);
         }
         
-        System.out.println(infl.toString());
+        System.out.println();
+        System.out.println("Influencer");
+        System.out.println(infl);
         
         while(!wlLIFO.isEmpty()) {
         	Node n = wlLIFO.extract();
@@ -43,6 +50,10 @@ public class main {
         		}
         	}
         }
+        
+        System.out.println();
+        System.out.println("Result RD");
+        rd.printResult();
 
     }
 
