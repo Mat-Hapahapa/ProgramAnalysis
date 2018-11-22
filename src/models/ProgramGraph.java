@@ -6,7 +6,7 @@ import java.util.List;
 
 public class ProgramGraph {
 
-    List<Node> nodes;
+    private List<Node> nodes;
 
     public ProgramGraph(ArrayList<String> path) {
     	this.nodes = new ArrayList<Node>();

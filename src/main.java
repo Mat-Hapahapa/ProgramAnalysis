@@ -14,6 +14,20 @@ public class main {
 
         ProgramGraph G = new ProgramGraph(getSimpleProgram());
         G.printGraph();
+        
+        WorklistLIFO wlLIFO = new WorklistLIFO();
+        ReachingDefinition rd = new ReachingDefinition();
+        Influenza infl = new Influenza();
+        
+        for(Node node: G.getNodes()) {
+        	wlLIFO.insert(node);
+        	rd.analize(node);
+        	infl.initFromNode(node);
+        }
+        
+        for(Node node: G.getNodes()) {
+        	
+        }
 
     }
 
