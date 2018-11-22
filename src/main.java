@@ -25,6 +25,10 @@ public class main {
         	infl.initFromNode(node);
         }
         
+        for(String s : rd.leastElement) {
+        	System.out.println(s);
+        }
+        
         for(Node node: G.getNodes()) {
         	infl.generateList(node);
         }
