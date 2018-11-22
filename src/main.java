@@ -13,26 +13,33 @@ public class main {
 
         ProgramGraph G = new ProgramGraph(getSimpleProgram());      // Get program
         G.printGraph();                                             // Print program (Xn, Xn, "constrain")
-
+        
         WorklistLIFO wlLIFO = new WorklistLIFO();
         ReachingDefinition rd = new ReachingDefinition();
         Influencer infl = new Influencer();
 
-        for (Node node : G.getNodes()) {
-            wlLIFO.insert(node);
-            rd.initAnalize(node);
-            infl.initFromNode(node);
-        }
-
-        for (String s : rd.leastElement) {
-            System.out.println(s);
-        }
-
-        for (Node node : G.getNodes()) {
-            infl.generateList(node);
+        for(Node node: G.getNodes()) {
+        	wlLIFO.insert(node);
+        	rd.initAnalize(node);
+        	infl.initFromNode(node);
         }
         
-        System.out.println(infl.toString());
+        // Is adding the variables into the first Node
+        rd.addDeclarations();
+
+        System.out.println();
+        System.out.print("Variables RD --> ");
+        for(String s : rd.leastElement) {
+        	System.out.print(s + ' ');
+        }
+        
+        for(Node node: G.getNodes()) {
+        	infl.generateList(node);
+        }
+        
+        System.out.println();
+        System.out.println("Influencer");
+        System.out.println(infl);
         
         while(!wlLIFO.isEmpty()) {
         	Node n = wlLIFO.extract();
@@ -43,6 +50,10 @@ public class main {
         		}
         	}
         }
+
+        System.out.println();
+        System.out.println("Result RD");
+        rd.printResult();
 
 
         SignDetectionLIFO();
