@@ -44,7 +44,11 @@ public class ReachingDefinition {
 	}
 
 	public void analize(Node node) {
-		
+		String op = node.getOperation();
+        if (op.contains(":=")){
+            String changingVar =  op.substring(0, op.indexOf(":"));
+            nodeList.get(node.getToNode()).add(node);
+        }
 	}
 	
 	public String toString() {
