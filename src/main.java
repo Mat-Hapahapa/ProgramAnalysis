@@ -12,20 +12,20 @@ public class main {
         System.out.println("Test Program");
 
 
-        ProgramGraph G = new ProgramGraph(getSimpleProgram());
-        G.printGraph();
+        ProgramGraph G = new ProgramGraph(getSimpleProgram());      // Get program
+        G.printGraph();                                             // Print program (Xn, Xn, "constrain")
         
-        WorklistLIFO wlLIFO = new WorklistLIFO();
-        ReachingDefinition rd = new ReachingDefinition();
-        Influecer infl = new Influecer();
+        WorklistLIFO wlLIFO = new WorklistLIFO();                   // W := empty; creates an empty worklist with worklist alogorithm
+        ReachingDefinition rd = new ReachingDefinition();           // Choose analysis definition (Initialize RD)
+        Influencer infl = new Influencer();                         // Initialize empty influencer
         
-        for(Node node: G.getNodes()) {
-        	wlLIFO.insert(node);
-        	rd.analize(node);
-        	infl.initFromNode(node);
+        for(Node node: G.getNodes()) {                              // Iterate through set of Nodes
+        	wlLIFO.insert(node);                                    // Insert nodes from graph into worklist
+        	rd.analize(node);                                       // The least element of Lattice (Find variables from program)
+        	infl.initFromNode(node);                                // Add every node to influencer list.
         }
         
-        for(Node node: G.getNodes()) {
+        for(Node node: G.getNodes()) {                               // Iterate through set of Nodes
         	infl.generateList(node, (ArrayList<Node>)G.getNodes());
         }
 
@@ -65,44 +65,5 @@ public class main {
         );
 
         return new ArrayList<String>();
-    }
-
-    public void worklistAlgorithm(ArrayList<Node> G) {
-        // Operations on worklist:
-        // empty = is the worklist empty
-        // Insert = returns a new worklist that is as W except it has a new constraint
-        // extract = returns a pair whose first component is a constraint x w t in the worklist and whose second component is the smaller worklist obtained by removing an occurrence of x w t; it is normally used as in
-
-
-        List<Node> W = new ArrayList<Node>(); // W := empty;
-        List<Node> infl = new ArrayList<Node>();
-
-        for(Node node : G) {  // for( x w t in S)
-            W = WorklistLIFO.insert(node, W); //  := insert((x w t),W);       all constraints in the worklist
-            //Analysis[x] := ⊥;   // the least element of L
-            //infl[node.getToNode()] //infl[x] := ∅;
-        }
-
-        /*
-
-        for (x w t in S) {
-            for (x0 in FV(t)) {
-                infl[x0] := infl[x0] ∪ {x w t}; // changes to x0 might influence x via the constraint x w t
-            }
-        }
-
-        while (!W.empty()) { //while (W != empty)
-            ((x w t),W) := extract(W); // consider the next constraint
-            new := eval(t,Analysis);
-
-            if (Analysis[x] 6w new) {        // any work to do?
-                Analysis[x] := Analysis[x] t new;  // update the analysis info.
-            }
-        }
-
-        for (x0 w t0 in infl[x]) {
-            W := insert((x0 w t0),W);  // update the worklist
-        }
-    }*/
     }
 }

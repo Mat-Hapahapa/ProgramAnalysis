@@ -4,11 +4,11 @@ import java.util.Map;
 
 import models.Node;
 
-public class Influecer {
+public class Influencer {
 	
 	public Map<String, ArrayList<Node>> nodeList;
 
-	public Influecer() {
+	public Influencer() {
 		nodeList = new HashMap<String, ArrayList<Node>>();
 	}
 
