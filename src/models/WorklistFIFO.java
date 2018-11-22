@@ -13,7 +13,7 @@ public class WorklistFIFO {
 
 
     public void empty(){
-        // Not used - get worklist instead
+        // Not used - constructor makes an empty list
     }
 
     public void insert(Node constrain) {
