@@ -6,15 +6,18 @@ import models.Node;
 
 public class ReachingDefinition {
 
-    public Map<String, ArrayList<Node>> nodeList;
+	public Map<Integer, ArrayList<Node>> nodeList;
 
-    public ReachingDefinition() {
-        nodeList = new HashMap<String, ArrayList<Node>>();
-    }
+	public ReachingDefinition() {
+		nodeList = new HashMap<Integer, ArrayList<Node>>();
+	}
 
-    public void analize(Node node) {
-        // TODO Auto-generated method stub
+	public void initAnalize(Node node) {
 
-    }
+	}
+
+	public void analize(Node node) {
+
+	}
 
 }

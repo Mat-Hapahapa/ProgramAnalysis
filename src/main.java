@@ -15,9 +15,9 @@ public class main {
         ProgramGraph G = new ProgramGraph(getSimpleProgram());      // Get program
         G.printGraph();                                             // Print program (Xn, Xn, "constrain")
         
-        WorklistLIFO wlLIFO = new WorklistLIFO();                   // W := empty; creates an empty worklist with worklist alogorithm
-        ReachingDefinition rd = new ReachingDefinition();           // Choose analysis definition (Initialize RD)
-        Influencer infl = new Influencer();                         // Initialize empty influencer
+        WorklistLIFO wlLIFO = new WorklistLIFO();
+        ReachingDefinition rd = new ReachingDefinition();
+        Influencer infl = new Influencer();
         
         for(Node node: G.getNodes()) {                              // Iterate through set of Nodes
         	wlLIFO.insert(node);                                    // Insert nodes from graph into worklist
@@ -25,8 +25,8 @@ public class main {
         	infl.initFromNode(node);                                // Add every node to influencer list.
         }
         
-        for(Node node: G.getNodes()) {                               // Iterate through set of Nodes
-        	infl.generateList(node, (ArrayList<Node>)G.getNodes());
+        for(Node node: G.getNodes()) {
+        	infl.generateList(node);
         }
 
     }
