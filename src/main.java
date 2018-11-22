@@ -127,8 +127,9 @@ public class main {
 
         while(!wlLIFO.isEmpty()) {
             Node n = wlLIFO.extract();
+            sd.analize(n);
             if(sd.eval(n)) {
-                sd.analize(n);
+
                 for(Node constraint: infl.getInflByConstraint(n)) {
                     wlLIFO.insert(constraint);
                 }
