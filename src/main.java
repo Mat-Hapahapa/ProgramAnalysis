@@ -12,20 +12,20 @@ public class main {
         System.out.println("Test Program");
 
 
-        ProgramGraph G = new ProgramGraph(getSimpleProgram());
-        G.printGraph();
+        ProgramGraph G = new ProgramGraph(getSimpleProgram());          // Get program
+        G.printGraph();                                                 // Print program (Xn, Xn, "constrain")
         
-        WorklistLIFO wlLIFO = new WorklistLIFO();
-        ReachingDefinition rd = new ReachingDefinition();
-        Influenza infl = new Influenza();
+        WorklistLIFO wlLIFO = new WorklistLIFO();                       // W := empty; creates an empty worklist with worklist alogorithm
+        ReachingDefinition rd = new ReachingDefinition();               // Choose analysis definition (Initialize RD)
+        Influencer infl = new Influencer();                             // Initialize empty influencer
         
-        for(Node node: G.getNodes()) {
-        	wlLIFO.insert(node);
-        	rd.analize(node);
-        	infl.initFromNode(node);
+        for(Node node: G.getNodes()) {                                  // Iterate through set of Nodes
+        	wlLIFO.insert(node);                                        // Insert nodes from graph into worklist
+        	rd.analize(node);                                           // The least element of Lattice (Find variables from program)
+        	infl.initFromNode(node);                                    // Add every node to influencer list.
         }
         
-        for(Node node: G.getNodes()) {
+        for(Node node: G.getNodes()) {                                  // Iterate through set of Nodes
         	
         }
 
