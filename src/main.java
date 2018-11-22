@@ -17,7 +17,7 @@ public class main {
         
         WorklistLIFO wlLIFO = new WorklistLIFO();
         ReachingDefinition rd = new ReachingDefinition();
-        Influenza infl = new Influenza();
+        Influecer infl = new Influecer();
         
         for(Node node: G.getNodes()) {
         	wlLIFO.insert(node);
@@ -26,7 +26,7 @@ public class main {
         }
         
         for(Node node: G.getNodes()) {
-        	
+        	infl.generateList(node, (ArrayList<Node>)G.getNodes());
         }
 
     }
