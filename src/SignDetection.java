@@ -26,7 +26,7 @@ public class SignDetection {
     }
 
     public boolean eval(Node node) {
-        return true;
+        return false;
     }
 
     public void analize(Node node) {

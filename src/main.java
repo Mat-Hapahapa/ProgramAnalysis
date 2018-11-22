@@ -112,14 +112,17 @@ public class main {
             infl.generateList(node);
         }
 
-        while (!wlLIFO.worklist.isEmpty()) {
-            Node node = wlLIFO.extract();
 
-            //eval  ??
-            sd.analize(node);
+
+        while(!wlLIFO.isEmpty()) {
+            Node n = wlLIFO.extract();
+            if(sd.eval(n)) {
+                sd.analize(n);
+                for(Node constraint: infl.getInflByConstraint(n)) {
+                    wlLIFO.insert(constraint);
+                }
+            }
         }
-
-
 
         //Result
         for (int i = 0; i < sd.signList.values().size(); i++) {
