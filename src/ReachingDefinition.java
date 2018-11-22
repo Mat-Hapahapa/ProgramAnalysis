@@ -23,9 +23,15 @@ public class ReachingDefinition {
 			leastElement.add(s);
 		}
 	}
+	
+	public boolean eval(Node node) {
+		boolean isNew = false;
+		
+		return isNew;
+	}
 
 	public void analize(Node node) {
-
+		
 	}
 
 }

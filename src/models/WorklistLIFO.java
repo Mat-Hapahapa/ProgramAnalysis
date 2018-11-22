@@ -26,8 +26,8 @@ public final class WorklistLIFO {
         return nextTask;
     }
 
-    public void isEmpty() {
-        // Not used - constructor makes an empty list
+    public boolean isEmpty() {
+        return worklist.isEmpty();
     }
     
     
