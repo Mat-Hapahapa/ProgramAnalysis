@@ -21,7 +21,7 @@ public class main {
         
         for(Node node: G.getNodes()) {
         	wlLIFO.insert(node);
-        	rd.analize(node);
+        	rd.initAnalize(node);
         	infl.initFromNode(node);
         }
         
