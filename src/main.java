@@ -14,28 +14,30 @@ public class main {
 
         ProgramGraph G = new ProgramGraph(getSimpleProgram());      // Get program
         G.printGraph();                                             // Print program (Xn, Xn, "constrain")
-        
+
         WorklistLIFO wlLIFO = new WorklistLIFO();
         ReachingDefinition rd = new ReachingDefinition();
         Influencer infl = new Influencer();
 
-        for(Node node: G.getNodes()) {
-        	wlLIFO.insert(node);
-        	rd.initAnalize(node);
-        	infl.initFromNode(node);
-        }
-        
-        for(String s : rd.leastElement) {
-        	System.out.println(s);
-        }
-        
-        for(Node node: G.getNodes()) {
-        	infl.generateList(node);
+        for (Node node : G.getNodes()) {
+            wlLIFO.insert(node);
+            rd.initAnalize(node);
+            infl.initFromNode(node);
         }
 
+        for (String s : rd.leastElement) {
+            System.out.println(s);
+        }
+
+        for (Node node : G.getNodes()) {
+            infl.generateList(node);
+        }
+
+
+        SignDetectionLIFO();
     }
 
-    public static ArrayList<String> getSimpleProgram(){
+    public static ArrayList<String> getSimpleProgram() {
         ArrayList<String> program = new ArrayList<String>();
         program.add("0,1,y:=1");
         program.add("1,2,x>0");
@@ -45,7 +47,7 @@ public class main {
         return program;
     }
 
-    public static ArrayList<String> getAdvancedProgram(){
+    public static ArrayList<String> getAdvancedProgram() {
 
         System.out.println("" +
                 "1,2,x := 0" +
@@ -69,5 +71,50 @@ public class main {
         );
 
         return new ArrayList<String>();
+    }
+
+    public static void SignDetectionLIFO() {
+        System.out.println("Sign Detection");
+
+
+        ProgramGraph G = new ProgramGraph(getSimpleProgram());      // Get program
+        ArrayList<String> initialVariableSigns = new ArrayList<>();
+        initialVariableSigns.add("x->{+}");
+        initialVariableSigns.add("y->{+,0,-}");
+
+        WorklistLIFO wlLIFO = new WorklistLIFO();
+        SignDetection sd = new SignDetection();
+        sd.setInitialSign(initialVariableSigns);
+        Influencer infl = new Influencer();
+
+        for (Node node : G.getNodes()) {
+            wlLIFO.insert(node);
+            sd.initAnalize(node);
+            infl.initFromNode(node);
+        }
+
+        for (String s : sd.leastElement) {
+            System.out.println(s);              //Test that we collected all variables
+        }
+
+        for (Node node : G.getNodes()) {
+            infl.generateList(node);
+        }
+
+        while (!wlLIFO.worklist.isEmpty()) {
+            Node node = wlLIFO.extract();
+
+            //eval  ??
+            sd.analize(node);
+        }
+
+
+
+        //Result
+        for (int i = 0; i < sd.signList.values().size(); i++) {
+            for (String str : sd.signList.get(i)) {
+                System.out.println("Node " + i + " : " + str);
+            }
+        }
     }
 }

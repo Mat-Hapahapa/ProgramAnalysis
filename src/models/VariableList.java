@@ -6,6 +6,7 @@ import java.util.Arrays;
 public class VariableList {
 
     ArrayList<String> varList;
+    ArrayList<String> operatorList;
 
     public VariableList() {
         String alphabet = "qwertyuiopasdfghjklzxcvbnmA[]";
@@ -21,23 +22,46 @@ public class VariableList {
         varList.add("A[5]");
         varList.add("A[6]");
         varList.add("A[7]");
+
+        operatorList = new ArrayList<String>();
+        operatorList.add("<=");
+        operatorList.add(">=");
+        operatorList.add("==");
+        operatorList.add("!=");
+        operatorList.add("+");
+        operatorList.add("-");
+        operatorList.add("*");
+        operatorList.add("/");
+        operatorList.add("%");
+        operatorList.add("<");
+        operatorList.add(">");
+
     }
 
     public ArrayList<String> getVariables(String operation) {
-        ArrayList<String> stringList = new ArrayList<>();
+        ArrayList<String> variableList = new ArrayList<>();
         for (String str : operation.split("")) {
             if (varList.contains(str)) {
                 if (operation.contains("R.fst")) {
-                    stringList.add("R.fst");
+                    variableList.add("R.fst");
                 } else if (operation.contains("R.snd")) {
-                    stringList.add("R.snd");
+                    variableList.add("R.snd");
                 } else if (operation.contains("A[")) {
-                    stringList.add("A["+ operation.split("")[operation.indexOf("[") + 1] + "]");
+                    variableList.add("A["+ operation.split("")[operation.indexOf("[") + 1] + "]");
                 } else {
-                    stringList.add(str);
+                    variableList.add(str);
                 }
             }
         }
-        return stringList;
+        return variableList;
+    }
+
+    public String getOperator(String operation) {
+        for (String operator : operatorList) {
+            if (operation.contains(operator)){
+                return operator;
+            }
+        }
+        return "";
     }
 }
