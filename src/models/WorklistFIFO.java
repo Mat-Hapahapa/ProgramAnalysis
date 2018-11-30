@@ -12,8 +12,8 @@ public class WorklistFIFO {
     }
 
 
-    public void empty(){
-        // Not used - constructor makes an empty list
+    public boolean isEmpty() {
+        return worklist.isEmpty();
     }
 
     public void insert(Node constrain) {
@@ -24,5 +24,9 @@ public class WorklistFIFO {
         Node constrain = worklist.get(0);
         worklist.remove(0);
         return constrain;
+    }
+    
+    public String toString() {
+    	return worklist.toString();
     }
 }

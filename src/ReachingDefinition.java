@@ -37,17 +37,28 @@ public class ReachingDefinition {
 		}
 	}
 	
-	public boolean eval(Node node) {
-		boolean isNew = false;
+	public boolean eval(Node node, ArrayList<Node> visitedNodes) {
+		boolean visited = false;
 		
-		return isNew;
+		for(Node n: visitedNodes) {
+			visited = visited || node.equals(n);
+		}
+		
+//		if(visited) {
+//			System.out.println("Node: " + node.toString());
+//			System.out.println("visited:" + visitedNodes.toString());
+//		}
+		
+		return !visited;
 	}
 
 	public void analize(Node node) {
 		String op = node.getOperation();
         if (op.contains(":=")){
-            String changingVar =  op.substring(0, op.indexOf(":"));
             nodeList.get(node.getToNode()).add(node);
+            
+            //Add info from previous node
+            nodeList.get(node.getToNode()).addAll(nodeList.get(node.getFromNode()));
         }
 	}
 	
@@ -63,7 +74,11 @@ public class ReachingDefinition {
 		    System.out.print("q" + key + " --> ");
 		    
 		    for(Node n: value) {
-		    	System.out.print("(" + n.getOperation() + ",");
+		    	String op = n.getOperation();
+		    	Integer idx = op.indexOf(':');
+		    	String variable = idx > -1 ? op.substring(0, idx): op;
+		    	
+		    	System.out.print("(" + variable + ",");
 		    	System.out.print("q" + (n.getFromNode() == -1 ? "?": n.getFromNode()) + ",");
 		    	System.out.print("q" + n.getToNode() + "),");
 		    }

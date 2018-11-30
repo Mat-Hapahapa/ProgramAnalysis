@@ -30,6 +30,8 @@ public final class WorklistLIFO {
         return worklist.isEmpty();
     }
     
-    
+    public String toString() {
+    	return worklist.toString();
+    }
     
 }

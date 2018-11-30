@@ -1,5 +1,7 @@
 package models;
 
+import java.util.Objects;
+
 public class Node {
 
     private int fromNode;
@@ -38,5 +40,24 @@ public class Node {
     
     public String toString() {
     	return "(x" + this.fromNode + ", x" + this.toNode + ", " + this.operation + ")";
+    }
+    
+    @Override
+    public boolean equals(Object o) {
+
+        if (o == this) return true;
+        if (!(o instanceof Node)) {
+            return false;
+        }
+        Node node = (Node) o;
+        return  fromNode == node.fromNode &&
+        		toNode == node.toNode &&
+                Objects.equals(operation, node.operation);
+    }
+
+    
+    @Override
+    public int hashCode() {
+        return Objects.hash(fromNode, toNode, operation);
     }
 }
