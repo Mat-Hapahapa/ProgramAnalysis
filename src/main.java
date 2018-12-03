@@ -106,7 +106,7 @@ public class main {
         program.add("2,3,y:=x*y");
         program.add("3,1,x:=x-1");
         program.add("1,4,!x>0");
-        // program.add("4,-1,y:=y+1");
+        program.add("4,5,R.fst:=4");
         return program;
     }
 
@@ -144,6 +144,7 @@ public class main {
         ArrayList<String> initialVariableSigns = new ArrayList<>();
         initialVariableSigns.add("x..>{+}");
         initialVariableSigns.add("y..>{+,0,-}");
+        initialVariableSigns.add("R.fst..>{-}");
 
         //WorklistLIFO wlLIFO = new WorklistLIFO();
         WorklistFIFO wlLIFO = new WorklistFIFO();

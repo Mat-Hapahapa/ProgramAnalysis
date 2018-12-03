@@ -59,8 +59,8 @@ public class VariableList {
 
     public String isVariable(String varOrConst) {
         for (String str : varList) {
-            if (varList.contains(str)) {
-                return str;
+            if (varList.contains(varOrConst)) {
+                return varOrConst;
             }
         }
         return "";
