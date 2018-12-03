@@ -46,16 +46,16 @@ public class SignDetection {
                     newSign.add(str);
                 }
             }
-            // signList.put(node.getToNode(), newSign);
+             signList.put(node.getToNode(), newSign);
 
         } else { //Should check on conditions. if "<" or ">" or "!" then it will change the sign
 
             if (op.contains("!")) {
                 ArrayList<String> newSign = new ArrayList<String>();
-                String changingVar = op.substring(op.indexOf("!"), op.indexOf(":") + 1);  //Doesn't work on array or record
+                String changingVar = op.substring(op.indexOf("!") + 1, op.indexOf("!") + 2);  //Doesn't work on array or record
                 for (String str : signList.get(node.getFromNode())) {
                     if (str.contains(changingVar)) {
-                        newSign.add("x..>{0,-}");       //HACK CHANGE THIS!
+                        newSign.add("x..>{0}");       //HACK CHANGE THIS!
                     } else {
                         newSign.add(str);
                     }
@@ -102,22 +102,32 @@ public class SignDetection {
 
                 ArrayList<String> newSign = new ArrayList<>();
                 //Should check value of firstVar and SecondVar and compute result acordingly
-                newSign.add(var + "..>" + "{-}");
+
+
+                newSign.add(var + "..>" + "{+}");
                 signList.put(node.getToNode(), newSign);
 
 
             } else {
+                boolean isValReplaced = false;
                 for (String str : signList.get(node.getToNode())) {
 
                     System.out.println("From: " + node.getFromNode() + " -- To:" + node.getToNode() + " --test2");
 
                     String newVal = newSignVal(node, var, operator,firstVar,secondVar);
 
-
-
                     ArrayList<String> newSign = new ArrayList<>();
-                    newSign.add(var + "..>" + newVal);
+                    if (newVal.contains(str.substring(0,1))){
+                        newSign.add(newVal);
+                        isValReplaced = true;
+                    } else {
+                        newSign.add(str);
+                    }
+
                     signList.put(node.getToNode(), newSign);
+                }
+                if (!isValReplaced) {
+
                 }
             }
         }
@@ -130,6 +140,11 @@ public class SignDetection {
             case "+":
                 // var = 1 + 1;
             case "-":
+                String variable = vl.isVariable(first);
+                String number = vl.isVariable(second);
+                if (!variable.isEmpty()) {
+                    finalValue.append("+,0,-");
+                }
             case "*":
                 String firstOldVal = "";
                 String secondOldVal = "";

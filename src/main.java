@@ -84,6 +84,8 @@ public class main {
 
 
        // SignDetectionLIFO();
+
+        SignDetectionLIFO();
     }
 
     public static ArrayList<String> getSimpleProgram() {
@@ -94,6 +96,17 @@ public class main {
         program.add("3,1,x:=x-1");
         program.add("1,-1,end x>0");
        // program.add("4,-1,y:=y+1");
+        return program;
+    }
+
+    public static ArrayList<String> getSimpleProgramSignDetection() {
+        ArrayList<String> program = new ArrayList<String>();
+        program.add("0,1,y:=1");
+        program.add("1,2,x>0");
+        program.add("2,3,y:=x*y");
+        program.add("3,1,x:=x-1");
+        program.add("1,4,!x>0");
+        // program.add("4,-1,y:=y+1");
         return program;
     }
 
@@ -127,7 +140,7 @@ public class main {
         System.out.println("Sign Detection");
 
 
-        ProgramGraph G = new ProgramGraph(getSimpleProgram());      // Get program
+        ProgramGraph G = new ProgramGraph(getSimpleProgramSignDetection());      // Get program
         ArrayList<String> initialVariableSigns = new ArrayList<>();
         initialVariableSigns.add("x..>{+}");
         initialVariableSigns.add("y..>{+,0,-}");

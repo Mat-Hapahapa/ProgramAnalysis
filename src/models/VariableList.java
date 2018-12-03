@@ -47,9 +47,9 @@ public class VariableList {
                 } else if (operation.contains("R.snd")) {
                     variableList.add("R.snd");
                 } else if (operation.contains("A[")) {
-                    variableList.add("A["+ operation.split("")[operation.indexOf("[") + 1] + "]");
+                    variableList.add("A[" + operation.split("")[operation.indexOf("[") + 1] + "]");
                 } else if (operation.contains("end")) {
-                	// do nothing
+                    // do nothing
                 } else
                     variableList.add(str);
             }
@@ -57,9 +57,18 @@ public class VariableList {
         return variableList;
     }
 
+    public String isVariable(String varOrConst) {
+        for (String str : varList) {
+            if (varList.contains(str)) {
+                return str;
+            }
+        }
+        return "";
+    }
+
     public String getOperator(String operation) {
         for (String operator : operatorList) {
-            if (operation.contains(operator)){
+            if (operation.contains(operator)) {
                 return operator;
             }
         }
