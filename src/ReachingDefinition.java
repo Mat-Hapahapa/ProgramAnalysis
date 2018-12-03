@@ -49,9 +49,6 @@ public class ReachingDefinition {
 //        for(Node n: visitedNodes) {
 //            visited = visited || node.equals(n);
 //        }
-	
-		boolean nodeIsIn = false;
-		
 		
 		for(Node fromNode: fromNodeList) {
 			boolean isNodeFromInside = false;
