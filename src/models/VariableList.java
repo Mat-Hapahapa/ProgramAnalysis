@@ -48,9 +48,10 @@ public class VariableList {
                     variableList.add("R.snd");
                 } else if (operation.contains("A[")) {
                     variableList.add("A["+ operation.split("")[operation.indexOf("[") + 1] + "]");
-                } else {
+                } else if (operation.contains("end")) {
+                	// do nothing
+                } else
                     variableList.add(str);
-                }
             }
         }
         return variableList;

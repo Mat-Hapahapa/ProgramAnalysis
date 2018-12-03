@@ -39,7 +39,7 @@ public class Node {
     }
     
     public String toString() {
-    	return "(x" + this.fromNode + ", x" + this.toNode + ", " + this.operation + ")";
+    	return "(x" + (this.fromNode == 0 ? ">": this.fromNode) + ", x" + (this.toNode==-1? "<" : this.toNode) + ", " + this.operation + ")";
     }
     
     @Override
