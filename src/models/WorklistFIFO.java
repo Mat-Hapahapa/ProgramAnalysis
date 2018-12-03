@@ -26,7 +26,7 @@ public class WorklistFIFO {
         worklist.remove(0);
         return constrain;
     }
-    
+
     public String toString() {
     	return worklist.toString();
     }

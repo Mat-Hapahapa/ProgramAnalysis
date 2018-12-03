@@ -129,10 +129,11 @@ public class main {
 
         ProgramGraph G = new ProgramGraph(getSimpleProgram());      // Get program
         ArrayList<String> initialVariableSigns = new ArrayList<>();
-        initialVariableSigns.add("x->{+}");
-        initialVariableSigns.add("y->{+,0,-}");
+        initialVariableSigns.add("x..>{+}");
+        initialVariableSigns.add("y..>{+,0,-}");
 
-        WorklistLIFO wlLIFO = new WorklistLIFO();
+        //WorklistLIFO wlLIFO = new WorklistLIFO();
+        WorklistFIFO wlLIFO = new WorklistFIFO();
         SignDetection sd = new SignDetection();
         sd.setInitialSign(initialVariableSigns);
         Influencer infl = new Influencer();
