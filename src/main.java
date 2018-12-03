@@ -16,11 +16,13 @@ public class main {
         G.printGraph();                                             // Print program (Xn, Xn, "constrain")
         
         WorklistLIFO wlLIFO = new WorklistLIFO();
+        WorklistFIFO wlFIFO = new WorklistFIFO();
         ReachingDefinition rd = new ReachingDefinition();
         Influencer infl = new Influencer();
 
         for(Node node: G.getNodes()) {
         	wlLIFO.insert(node);
+        	wlFIFO.insert(node);
         	rd.initAnalize(node);
         	infl.initFromNode(node);
         }
@@ -42,12 +44,30 @@ public class main {
         System.out.println("Influencer");
         System.out.println(infl);
         
-        while(!wlLIFO.isEmpty()) {
-        	Node n = wlLIFO.extract();
-        	if(rd.eval(n)) {
+        // LIFO
+//        ArrayList<Node> visited = new ArrayList<Node>();
+//        while(!wlLIFO.isEmpty()) {
+//        	System.out.println("wlLIFO: " + wlLIFO.toString());
+//        	Node n = wlLIFO.extract();
+//        	if(rd.eval(n, visited)) {  // new info to evaluate?
+//        		visited.add(n);
+//        		rd.analize(n);
+//        		for(Node constraint: infl.getInflByConstraint(n)) {
+//        			wlLIFO.insert(constraint);
+//        		}
+//        	}
+//        }
+        
+        // FIFO
+        ArrayList<Node> visited = new ArrayList<Node>();
+        while(!wlFIFO.isEmpty()) {
+        	System.out.println("wlLIFO: " + wlFIFO.toString());
+        	Node n = wlFIFO.extract();
+        	if(rd.eval(n, visited)) {  // new info to evaluate?
+        		visited.add(n);
         		rd.analize(n);
         		for(Node constraint: infl.getInflByConstraint(n)) {
-        			wlLIFO.insert(constraint);
+        			wlFIFO.insert(constraint);
         		}
         	}
         }
@@ -57,7 +77,7 @@ public class main {
         rd.printResult();
 
 
-        SignDetectionLIFO();
+       // SignDetectionLIFO();
     }
 
     public static ArrayList<String> getSimpleProgram() {

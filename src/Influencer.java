@@ -22,7 +22,14 @@ public class Influencer {
 	}
 	
 	public ArrayList<Node> getInflByConstraint(Node node) {
-		return nodeList.get(node.getToNode());
+		if	(nodeList.get(node.getToNode()) != null) {
+			ArrayList<Node> tmp = nodeList.get(node.getToNode());
+			nodeList.remove(node.getToNode());
+			return tmp;
+		}
+
+		
+		return new ArrayList<Node>();
 	}
 	
 	public String toString() {
