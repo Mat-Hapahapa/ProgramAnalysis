@@ -61,7 +61,6 @@ public class main {
 //        }
         
         // FIFO
-        ArrayList<Node> visited = new ArrayList<Node>();
         int step = 0;
         while(!wlFIFO.isEmpty()) {
         	System.out.print("step " +step + " --> wlFIFO: ");
@@ -69,9 +68,7 @@ public class main {
         	System.out.println(wlFIFO.toString());
         	step++;
         	Node n = wlFIFO.extract();
-            if(rd.eval(n, visited)) {  // new info to evaluate?
-                visited.add(n);
-                rd.analize(n);
+            if(rd.analize(n)) {  // new info to evaluate?
         		for(Node constraint: infl.getInflByConstraint(n)) {
         			wlFIFO.insert(constraint);
         		}
@@ -80,12 +77,13 @@ public class main {
 
         System.out.println();
         System.out.println("Result RD");
-        rd.printResult();
+        //rd.printResult();
+        System.out.println(rd.toString());
 
 
        // SignDetectionLIFO();
 
-        SignDetectionLIFO();
+        //SignDetectionLIFO();
     }
 
     public static ArrayList<String> getSimpleProgram() {
@@ -94,7 +92,7 @@ public class main {
         program.add("1,2,x>0");
         program.add("2,3,y:=x*y");
         program.add("3,1,x:=x-1");
-        program.add("1,-1,end x>0");
+        program.add("1,4,end x>0");
        // program.add("4,-1,y:=y+1");
         return program;
     }

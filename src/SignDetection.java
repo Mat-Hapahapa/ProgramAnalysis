@@ -1,5 +1,4 @@
 import MicroC.Array;
-import com.sun.org.apache.bcel.internal.generic.SWITCH;
 import models.Node;
 import models.VariableList;
 

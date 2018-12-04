@@ -15,7 +15,7 @@ public class ReachingDefinition {
 	
 	public ReachingDefinition() {
 		nodeList = new HashMap<Integer, ArrayList<Node>>();
-		nodeList.put(-1 , new ArrayList<Node>());
+		//nodeList.put(-1 , new ArrayList<Node>());
 	}
 
 	public void initAnalize(Node node) {
@@ -34,13 +34,12 @@ public class ReachingDefinition {
 	public void addDeclarations() {
 		ArrayList<Node> list = nodeList.get(0);
 		for(String variable: leastElement) {
-			list.add(new Node(-2, 0, variable));
+			list.add(new Node(0, 0, variable));
 		}
 	}
 	
-	public boolean eval(Node node, ArrayList<Node> visitedNodes) {
+	public boolean eval(Node node) {
 		//(RD(qo) \ killRD(qo, alpha, q.)) U genRD(qo, alpha, q.) ~C RD(q.)
-		//boolean visited = false;
 		boolean newInfo = false;
 		
 		ArrayList<Node> fromNodeList = nodeList.get(node.getFromNode());
@@ -60,52 +59,36 @@ public class ReachingDefinition {
 		}
 		
 		return newInfo;
-		
-		
-//		if(visited) {
-//			System.out.println("Node: " + node.toString());
-//			System.out.println("visited:" + visitedNodes.toString());
-//		}
-		
-		//return !visited;
 	}
 
-	public void analize(Node node) {
+	public boolean analize(Node node) {
 		String op = node.getOperation();
 		String variable = "";
-		ArrayList<Node> myList = nodeList.get(node.getToNode());
-        boolean isAsignmentDuplicated = true;
+		boolean newInfo = false;
+		ArrayList<Node> fromNodeList = nodeList.get(node.getFromNode());
+		ArrayList<Node> tmpList = new ArrayList<Node>();
 		
 		if (op.contains(":=")){
-        	boolean isIn = false;
-    		for(Node myNode: myList) {
-    			isIn = isIn || myNode.equals(node);
+			variable = op.substring(0, op.indexOf(":="));
+        	
+    		for(Node myNode: fromNodeList) {
+    			if(myNode.getOperation().contains(variable)) {
+    				tmpList.add(new Node(myNode.getFromNode(),myNode.getToNode(), variable));
+    			} else {
+    				tmpList.add(myNode);
+    			}
     		}
     		
-    		if(!isIn) {
-    			myList.add(node);
-    			isAsignmentDuplicated = false;
-    		}
-    		variable = op.substring(0, op.indexOf(":="));
-        }
- 
-        //Add info from previous node
-        ArrayList<Node> nl = nodeList.get(node.getFromNode());
-        for(Node n : nl) {
-        	if(n.getFromNode() == -2 && n.getOperation().equals(variable)) { //InitialNode with unknown variable
-        		//Nothing
-        		
-        	}else {   		
-        		boolean isIn = false;
-        		for(Node myNode: myList) {
-        			isIn = isIn || myNode.equals(n);
-        		}
-        		
-        		if(!isIn && (isAsignmentDuplicated || !n.getOperation().contains(variable))) {
-        			myList.add(n);
-        		}
-        	}
-        }
+		} else {
+			tmpList.addAll(nodeList.get(node.getFromNode()));
+		}
+		nodeList.put(node.getToNode(), tmpList);
+		
+		
+		 
+		return false;
+		 
+		
 	}
 	
 	public String toString() {
