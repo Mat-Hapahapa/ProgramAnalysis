@@ -45,20 +45,7 @@ public class main {
         System.out.println();
         System.out.println("Influencer");
         System.out.println(infl);
-        
-        // LIFO
-//        ArrayList<Node> visited = new ArrayList<Node>();
-//        while(!wlLIFO.isEmpty()) {
-//        	System.out.println("wlLIFO: " + wlLIFO.toString());
-//        	Node n = wlLIFO.extract();
-//        	if(rd.eval(n, visited)) {  // new info to evaluate?
-//        		visited.add(n);
-//        		rd.analize(n);
-//        		for(Node constraint: infl.getInflByConstraint(n)) {
-//        			wlLIFO.insert(constraint);
-//        		}
-//        	}
-//        }
+
         
         // FIFO
         int step = 0;
@@ -78,22 +65,22 @@ public class main {
         System.out.println();
         System.out.println("Result RD");
         //rd.printResult();
-        System.out.println(rd.toString());
+        rd.print();
 
 
-       // SignDetectionLIFO();
+        SignDetection();
 
-        //SignDetectionLIFO();
     }
 
     public static ArrayList<String> getSimpleProgram() {
         ArrayList<String> program = new ArrayList<String>();
-        program.add("0,1,y:=1");
-        program.add("1,2,x>0");
-        program.add("2,3,y:=x*y");
-        program.add("3,1,x:=x-1");
-        program.add("1,4,end x>0");
-       // program.add("4,-1,y:=y+1");
+        program.add("0,1,A[0]:=1");
+        program.add("1,2,y:=1");
+        program.add("2,3,x>0");
+        program.add("3,4,y:=x*y");
+        program.add("4,5,x:=x-1");
+        program.add("2,6,!x>0");
+        program.add("6,7,R.fst:=4");
         return program;
     }
 
@@ -134,7 +121,7 @@ public class main {
         return new ArrayList<String>();
     }
 
-    public static void SignDetectionLIFO() {
+    public static void SignDetection() {
         System.out.println("Sign Detection");
 
 
