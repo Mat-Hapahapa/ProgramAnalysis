@@ -1,5 +1,4 @@
 import MicroC.Array;
-import com.sun.org.apache.bcel.internal.generic.SWITCH;
 import models.Node;
 import models.VariableList;
 
@@ -100,17 +99,17 @@ public class SignDetection {
                 signList.put(node.getToNode(), newSign);
             }
 
-            System.out.println("Assignment of single integer: " + var + " := " + operation);
+           // System.out.println("Assignment of single integer: " + var + " := " + operation);
         } else {
             String firstVar = operation.substring(0, operation.indexOf(operator));
             String secondVar = operation.substring(operation.indexOf(operator) + 1, operation.length());
 
-            System.out.println("Assignment where two variables do stuff: " + var + " := " + firstVar + operator + secondVar);
+          //  System.out.println("Assignment where two variables do stuff: " + var + " := " + firstVar + operator + secondVar);
 
 
             if (signList.get(node.getToNode()) == null) {
                 // Create new entry
-                System.out.println("From: " + node.getFromNode() + " -- To:" + node.getToNode() + " --TEST");
+           //     System.out.println("From: " + node.getFromNode() + " -- To:" + node.getToNode() + " --TEST");
 
                 ArrayList<String> newSign = new ArrayList<>();
                 //Should check value of firstVar and SecondVar and compute result acordingly
@@ -124,7 +123,7 @@ public class SignDetection {
                 ArrayList<String> newSign = new ArrayList<>();
                 for (String str : signList.get(node.getToNode())) {
 
-                    System.out.println("From: " + node.getFromNode() + " -- To:" + node.getToNode() + " --test2");
+                  //  System.out.println("From: " + node.getFromNode() + " -- To:" + node.getToNode() + " --test2");
 
                     String newVal = newSignVal(node, var, operator, firstVar, secondVar);
 
